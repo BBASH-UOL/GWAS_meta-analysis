@@ -1,3 +1,9 @@
+################################################################################
+#			NZ1 data
+################################################################################
+# Kate Lee Feb 2014
+
+
 ###  Overview
 # seem to have used default settings in snp test
 # may have used general model in frequentist test   ## NB wrong model (we used the additive test)

@@ -1,3 +1,9 @@
+###############################################################################
+#			DECODE data
+###############################################################################
+# Kate Lee Feb 2014
+
+
 ### Overview
 # ASSUMED that the default settings were used
 # pvalue, beta and se scores were for the additive frequentist test (correspondence with BOWN)

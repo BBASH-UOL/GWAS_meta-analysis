@@ -1,3 +1,8 @@
+###############################################################################
+#			Geisinger data
+##############################################################################
+# Kate Lee 2014
+
 ### Overview
 # seem to have used defaults in snp test, but have a few different naming schemes
 # compared with bbash set
