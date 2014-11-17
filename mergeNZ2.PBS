@@ -1,0 +1,254 @@
+# Kate Lee 20140129
+# script for merging NZ2 snptest results into one file (NZAAAGWAS2_CHR.txt)
+
+
+# snptest had been separated by chromosome
+# here we are putting the snptest output from all chromosomes into one file
+# in order to keep the chromosome information
+
+# created using:
+# 
+#for i in {1..22}; do echo "# NZAAAGWAS2_CHR$i.txt" >> mergeNZ2.txt
+#echo "tail -n +2 NZAAAGWAS2_CHR$i.txt > headless_NZAAAGWAS2_CHR$i" >> mergeNZ2.txt
+#echo "cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR$i > chr$i" >> mergeNZ2.txt
+#echo "cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR$i > startchr$i" >> mergeNZ2.txt
+#echo "cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR$i > endchr$i" >> mergeNZ2.txt 
+#echo "sed -i 's/chr//g' chr$i" >> mergeNZ2.txt
+#echo "paste -d ' ' startchr$i chr$i endchr$i > rf_NZAAAGWAS2_CHR$i" >> mergeNZ2.txt
+#echo "cat rf_NZAAAGWAS2_CHR$i >> NZAAAGWAS2_CHR.txt" >> mergeNZ2.txt 
+#echo >> mergeNZ2.txt
+#done
+# adding header to first set and adding info for chr x
+
+
+###########################################################################################################
+###########################################################################################################
+
+
+#PBS -o mergeNZ2.out
+#PBS -e mergebNZ2.error
+#PBS -N	mergeNZ2
+#PBS -l walltime=3:00:00
+#PBS -l vmem=10gb
+#PBS -m bea
+#PBS -M kl167@le.ac.uk
+#PBS -l nodes=1:ppn=1
+
+
+cd $PBS_O_WORKDIR
+
+### added back in header line for CHR1 file
+
+# NZAAAGWAS2_CHR1.txt
+tail -n +2 NZAAAGWAS2_CHR1.txt > headless_NZAAAGWAS2_CHR1
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR1 > chr1
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR1 > startchr1
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR1 > endchr1
+sed -i 's/chr//g' chr1
+paste -d ' ' startchr1 chr1 endchr1 > rf_NZAAAGWAS2_CHR1
+head -n 1 NZAAAGWAS2_CHR1.txt > NZAAAGWAS2_CHR.txt
+cat rf_NZAAAGWAS2_CHR1 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR2.txt
+tail -n +2 NZAAAGWAS2_CHR2.txt > headless_NZAAAGWAS2_CHR2
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR2 > chr2
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR2 > startchr2
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR2 > endchr2
+sed -i 's/chr//g' chr2
+paste -d ' ' startchr2 chr2 endchr2 > rf_NZAAAGWAS2_CHR2
+cat rf_NZAAAGWAS2_CHR2 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR3.txt
+tail -n +2 NZAAAGWAS2_CHR3.txt > headless_NZAAAGWAS2_CHR3
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR3 > chr3
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR3 > startchr3
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR3 > endchr3
+sed -i 's/chr//g' chr3
+paste -d ' ' startchr3 chr3 endchr3 > rf_NZAAAGWAS2_CHR3
+cat rf_NZAAAGWAS2_CHR3 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR4.txt
+tail -n +2 NZAAAGWAS2_CHR4.txt > headless_NZAAAGWAS2_CHR4
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR4 > chr4
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR4 > startchr4
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR4 > endchr4
+sed -i 's/chr//g' chr4
+paste -d ' ' startchr4 chr4 endchr4 > rf_NZAAAGWAS2_CHR4
+cat rf_NZAAAGWAS2_CHR4 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR5.txt
+tail -n +2 NZAAAGWAS2_CHR5.txt > headless_NZAAAGWAS2_CHR5
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR5 > chr5
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR5 > startchr5
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR5 > endchr5
+sed -i 's/chr//g' chr5
+paste -d ' ' startchr5 chr5 endchr5 > rf_NZAAAGWAS2_CHR5
+cat rf_NZAAAGWAS2_CHR5 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR6.txt
+tail -n +2 NZAAAGWAS2_CHR6.txt > headless_NZAAAGWAS2_CHR6
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR6 > chr6
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR6 > startchr6
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR6 > endchr6
+sed -i 's/chr//g' chr6
+paste -d ' ' startchr6 chr6 endchr6 > rf_NZAAAGWAS2_CHR6
+cat rf_NZAAAGWAS2_CHR6 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR7.txt
+tail -n +2 NZAAAGWAS2_CHR7.txt > headless_NZAAAGWAS2_CHR7
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR7 > chr7
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR7 > startchr7
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR7 > endchr7
+sed -i 's/chr//g' chr7
+paste -d ' ' startchr7 chr7 endchr7 > rf_NZAAAGWAS2_CHR7
+cat rf_NZAAAGWAS2_CHR7 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR8.txt
+tail -n +2 NZAAAGWAS2_CHR8.txt > headless_NZAAAGWAS2_CHR8
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR8 > chr8
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR8 > startchr8
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR8 > endchr8
+sed -i 's/chr//g' chr8
+paste -d ' ' startchr8 chr8 endchr8 > rf_NZAAAGWAS2_CHR8
+cat rf_NZAAAGWAS2_CHR8 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR9.txt
+tail -n +2 NZAAAGWAS2_CHR9.txt > headless_NZAAAGWAS2_CHR9
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR9 > chr9
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR9 > startchr9
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR9 > endchr9
+sed -i 's/chr//g' chr9
+paste -d ' ' startchr9 chr9 endchr9 > rf_NZAAAGWAS2_CHR9
+cat rf_NZAAAGWAS2_CHR9 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR10.txt
+tail -n +2 NZAAAGWAS2_CHR10.txt > headless_NZAAAGWAS2_CHR10
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR10 > chr10
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR10 > startchr10
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR10 > endchr10
+sed -i 's/chr//g' chr10
+paste -d ' ' startchr10 chr10 endchr10 > rf_NZAAAGWAS2_CHR10
+cat rf_NZAAAGWAS2_CHR10 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR11.txt
+tail -n +2 NZAAAGWAS2_CHR11.txt > headless_NZAAAGWAS2_CHR11
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR11 > chr11
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR11 > startchr11
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR11 > endchr11
+sed -i 's/chr//g' chr11
+paste -d ' ' startchr11 chr11 endchr11 > rf_NZAAAGWAS2_CHR11
+cat rf_NZAAAGWAS2_CHR11 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR12.txt
+tail -n +2 NZAAAGWAS2_CHR12.txt > headless_NZAAAGWAS2_CHR12
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR12 > chr12
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR12 > startchr12
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR12 > endchr12
+sed -i 's/chr//g' chr12
+paste -d ' ' startchr12 chr12 endchr12 > rf_NZAAAGWAS2_CHR12
+cat rf_NZAAAGWAS2_CHR12 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR13.txt
+tail -n +2 NZAAAGWAS2_CHR13.txt > headless_NZAAAGWAS2_CHR13
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR13 > chr13
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR13 > startchr13
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR13 > endchr13
+sed -i 's/chr//g' chr13
+paste -d ' ' startchr13 chr13 endchr13 > rf_NZAAAGWAS2_CHR13
+cat rf_NZAAAGWAS2_CHR13 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR14.txt
+tail -n +2 NZAAAGWAS2_CHR14.txt > headless_NZAAAGWAS2_CHR14
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR14 > chr14
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR14 > startchr14
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR14 > endchr14
+sed -i 's/chr//g' chr14
+paste -d ' ' startchr14 chr14 endchr14 > rf_NZAAAGWAS2_CHR14
+cat rf_NZAAAGWAS2_CHR14 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR15.txt
+tail -n +2 NZAAAGWAS2_CHR15.txt > headless_NZAAAGWAS2_CHR15
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR15 > chr15
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR15 > startchr15
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR15 > endchr15
+sed -i 's/chr//g' chr15
+paste -d ' ' startchr15 chr15 endchr15 > rf_NZAAAGWAS2_CHR15
+cat rf_NZAAAGWAS2_CHR15 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR16.txt
+tail -n +2 NZAAAGWAS2_CHR16.txt > headless_NZAAAGWAS2_CHR16
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR16 > chr16
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR16 > startchr16
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR16 > endchr16
+sed -i 's/chr//g' chr16
+paste -d ' ' startchr16 chr16 endchr16 > rf_NZAAAGWAS2_CHR16
+cat rf_NZAAAGWAS2_CHR16 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR17.txt
+tail -n +2 NZAAAGWAS2_CHR17.txt > headless_NZAAAGWAS2_CHR17
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR17 > chr17
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR17 > startchr17
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR17 > endchr17
+sed -i 's/chr//g' chr17
+paste -d ' ' startchr17 chr17 endchr17 > rf_NZAAAGWAS2_CHR17
+cat rf_NZAAAGWAS2_CHR17 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR18.txt
+tail -n +2 NZAAAGWAS2_CHR18.txt > headless_NZAAAGWAS2_CHR18
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR18 > chr18
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR18 > startchr18
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR18 > endchr18
+sed -i 's/chr//g' chr18
+paste -d ' ' startchr18 chr18 endchr18 > rf_NZAAAGWAS2_CHR18
+cat rf_NZAAAGWAS2_CHR18 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR19.txt
+tail -n +2 NZAAAGWAS2_CHR19.txt > headless_NZAAAGWAS2_CHR19
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR19 > chr19
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR19 > startchr19
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR19 > endchr19
+sed -i 's/chr//g' chr19
+paste -d ' ' startchr19 chr19 endchr19 > rf_NZAAAGWAS2_CHR19
+cat rf_NZAAAGWAS2_CHR19 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR20.txt
+tail -n +2 NZAAAGWAS2_CHR20.txt > headless_NZAAAGWAS2_CHR20
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR20 > chr20
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR20 > startchr20
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR20 > endchr20
+sed -i 's/chr//g' chr20
+paste -d ' ' startchr20 chr20 endchr20 > rf_NZAAAGWAS2_CHR20
+cat rf_NZAAAGWAS2_CHR20 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR21.txt
+tail -n +2 NZAAAGWAS2_CHR21.txt > headless_NZAAAGWAS2_CHR21
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR21 > chr21
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR21 > startchr21
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR21 > endchr21
+sed -i 's/chr//g' chr21
+paste -d ' ' startchr21 chr21 endchr21 > rf_NZAAAGWAS2_CHR21
+cat rf_NZAAAGWAS2_CHR21 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHR22.txt
+tail -n +2 NZAAAGWAS2_CHR22.txt > headless_NZAAAGWAS2_CHR22
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHR22 > chr22
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHR22 > startchr22
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHR22 > endchr22
+sed -i 's/chr//g' chr22
+paste -d ' ' startchr22 chr22 endchr22 > rf_NZAAAGWAS2_CHR22
+cat rf_NZAAAGWAS2_CHR22 >> NZAAAGWAS2_CHR.txt
+
+# NZAAAGWAS2_CHRX.txt
+tail -n +2 NZAAAGWAS2_CHRX.txt > headless_NZAAAGWAS2_CHRX
+cut -d ' ' -f 1 headless_NZAAAGWAS2_CHRX > chrX
+cut -d ' ' -f 1-2 headless_NZAAAGWAS2_CHRX > startchrX
+cut -d ' ' -f 4- headless_NZAAAGWAS2_CHRX > endchrX
+sed -i 's/chr//g' chrX
+paste -d ' ' startchrX chrX endchrX > rf_NZAAAGWAS2_CHRX
+cat rf_NZAAAGWAS2_CHRX >> NZAAAGWAS2_CHR.txt
+
+
+
+
+
+

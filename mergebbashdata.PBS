@@ -1,0 +1,238 @@
+
+# Kate Lee 20140129
+# script for merging bbash snptest results into one file (snptest_cov3_all_chr)
+
+
+# snptest had been run on each chromosome separately (due to computational limitations?)
+# here we are putting the snptest output from all chromosomes into one file
+
+# created using:
+# for i in {1..22}; do  echo "tail -n +14 snptest_cov3_all_chr$i > headless_snptest_cov3_all_chr$i" >> mergebbashdata.txt; echo "cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr$i > startchr$i" >> mergebbashdata.txt; echo "cut -d ' ' -f 4- headless_snptest_cov3_all_chr$i > endchr$i" >> mergebbashdata.txt; echo "cut -d ' ' -f 3 headless_snptest_cov3_all_chr$i > chr$i" >> mergebbashdata.txt; echo "sed -i 's/NA\s*/$i/g' chr$i" >> mergebbashdata.txt; echo "paste -d ' ' startchr$i chr$i endchr$i > rf_snptest_cov3_all_chr$i" >> mergebbashdata.txt; echo "cat rf_snptest_cov3_all_chr$i >> snptest_cov3_all_chr1" >> mergebbashdata.txt; done
+# changing chr commands and adding info for chr x
+###########################################################################################################
+###########################################################################################################
+
+
+#PBS -o mergebbashdata.out
+#PBS -e mergebbashdata.error
+#PBS -l walltime=3:00:00
+#PBS -l vmem=6gb
+#PBS -m bea
+#PBS -M kl167@le.ac.uk
+#PBS -l nodes=1:ppn=1
+
+
+cd $PBS_O_WORKDIR
+
+#######   chromosome 1
+# keep commend and header information 
+# (this is the same as for every other chromosome, except the filenames and times change)
+
+# get comment and header lines
+head -n 13 snptest_cov3_all_chr1 > head_chr1
+
+# get file without header information
+tail -n +14 snptest_cov3_all_chr1 > headless_snptest_cov3_all_chr1
+
+# separate first two columns into start file
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr1 > startchr1
+
+# get fourth to end column into end file
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr1 > endchr1
+
+# get 3rd column and put in chromosome information
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr1 > chr1
+sed -i 's/NA\s*/1/g' chr1
+
+# paste the start chromosome and end information back together
+paste -d ' ' startchr1 chr1 endchr1 > rf_snptest_cov3_all_chr1
+
+# put back on the comment and header lines and name the file
+cat rf_snptest_cov3_all_chr1 >> head_chr1
+mv head_chr1 snptest_cov3_all_chr
+
+########   chromosome 2
+# remove comment and header lines
+tail -n +14 snptest_cov3_all_chr2 > headless_snptest_cov3_all_chr2
+
+# take apart the rest of the file and change the chromosome number
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr2 > startchr2
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr2 > endchr2
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr2 > chr2
+sed -i 's/NA\s*/2/g' chr2
+
+# paste back together and append to main file (snptest_cov3_all_chr)
+paste -d ' ' startchr2 chr2 endchr2 > rf_snptest_cov3_all_chr2
+cat rf_snptest_cov3_all_chr2 >> snptest_cov3_all_chr
+
+
+####### repeat steps for chromosome 2 for the rest of the snptest chromosome files
+
+tail -n +14 snptest_cov3_all_chr3 > headless_snptest_cov3_all_chr3
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr3 > startchr3
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr3 > endchr3
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr3 > chr3
+sed -i 's/NA\s*/3/g' chr3
+paste -d ' ' startchr3 chr3 endchr3 > rf_snptest_cov3_all_chr3
+cat rf_snptest_cov3_all_chr3 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr4 > headless_snptest_cov3_all_chr4
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr4 > startchr4
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr4 > endchr4
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr4 > chr4
+sed -i 's/NA\s*/4/g' chr4
+paste -d ' ' startchr4 chr4 endchr4 > rf_snptest_cov3_all_chr4
+cat rf_snptest_cov3_all_chr4 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr5 > headless_snptest_cov3_all_chr5
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr5 > startchr5
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr5 > endchr5
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr5 > chr5
+sed -i 's/NA\s*/5/g' chr5
+paste -d ' ' startchr5 chr5 endchr5 > rf_snptest_cov3_all_chr5
+cat rf_snptest_cov3_all_chr5 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr6 > headless_snptest_cov3_all_chr6
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr6 > startchr6
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr6 > endchr6
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr6 > chr6
+sed -i 's/NA\s*/6/g' chr6
+paste -d ' ' startchr6 chr6 endchr6 > rf_snptest_cov3_all_chr6
+cat rf_snptest_cov3_all_chr6 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr7 > headless_snptest_cov3_all_chr7
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr7 > startchr7
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr7 > endchr7
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr7 > chr7
+sed -i 's/NA\s*/7/g' chr7
+paste -d ' ' startchr7 chr7 endchr7 > rf_snptest_cov3_all_chr7
+cat rf_snptest_cov3_all_chr7 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr8 > headless_snptest_cov3_all_chr8
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr8 > startchr8
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr8 > endchr8
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr8 > chr8
+sed -i 's/NA\s*/8/g' chr8
+paste -d ' ' startchr8 chr8 endchr8 > rf_snptest_cov3_all_chr8
+cat rf_snptest_cov3_all_chr8 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr9 > headless_snptest_cov3_all_chr9
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr9 > startchr9
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr9 > endchr9
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr9 > chr9
+sed -i 's/NA\s*/9/g' chr9
+paste -d ' ' startchr9 chr9 endchr9 > rf_snptest_cov3_all_chr9
+cat rf_snptest_cov3_all_chr9 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr10 > headless_snptest_cov3_all_chr10
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr10 > startchr10
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr10 > endchr10
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr10 > chr10
+sed -i 's/NA\s*/10/g' chr10
+paste -d ' ' startchr10 chr10 endchr10 > rf_snptest_cov3_all_chr10
+cat rf_snptest_cov3_all_chr10 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr11 > headless_snptest_cov3_all_chr11
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr11 > startchr11
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr11 > endchr11
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr11 > chr11
+sed -i 's/NA\s*/11/g' chr11
+paste -d ' ' startchr11 chr11 endchr11 > rf_snptest_cov3_all_chr11
+cat rf_snptest_cov3_all_chr11 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr12 > headless_snptest_cov3_all_chr12
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr12 > startchr12
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr12 > endchr12
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr12 > chr12
+sed -i 's/NA\s*/12/g' chr12
+paste -d ' ' startchr12 chr12 endchr12 > rf_snptest_cov3_all_chr12
+cat rf_snptest_cov3_all_chr12 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr13 > headless_snptest_cov3_all_chr13
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr13 > startchr13
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr13 > endchr13
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr13 > chr13
+sed -i 's/NA\s*/13/g' chr13
+paste -d ' ' startchr13 chr13 endchr13 > rf_snptest_cov3_all_chr13
+cat rf_snptest_cov3_all_chr13 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr14 > headless_snptest_cov3_all_chr14
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr14 > startchr14
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr14 > endchr14
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr14 > chr14
+sed -i 's/NA\s*/14/g' chr14
+paste -d ' ' startchr14 chr14 endchr14 > rf_snptest_cov3_all_chr14
+cat rf_snptest_cov3_all_chr14 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr15 > headless_snptest_cov3_all_chr15
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr15 > startchr15
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr15 > endchr15
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr15 > chr15
+sed -i 's/NA\s*/15/g' chr15
+paste -d ' ' startchr15 chr15 endchr15 > rf_snptest_cov3_all_chr15
+cat rf_snptest_cov3_all_chr15 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr16 > headless_snptest_cov3_all_chr16
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr16 > startchr16
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr16 > endchr16
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr16 > chr16
+sed -i 's/NA\s*/16/g' chr16
+paste -d ' ' startchr16 chr16 endchr16 > rf_snptest_cov3_all_chr16
+cat rf_snptest_cov3_all_chr16 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr17 > headless_snptest_cov3_all_chr17
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr17 > startchr17
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr17 > endchr17
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr17 > chr17
+sed -i 's/NA\s*/17/g' chr17
+paste -d ' ' startchr17 chr17 endchr17 > rf_snptest_cov3_all_chr17
+cat rf_snptest_cov3_all_chr17 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr18 > headless_snptest_cov3_all_chr18
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr18 > startchr18
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr18 > endchr18
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr18 > chr18
+sed -i 's/NA\s*/18/g' chr18
+paste -d ' ' startchr18 chr18 endchr18 > rf_snptest_cov3_all_chr18
+cat rf_snptest_cov3_all_chr18 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr19 > headless_snptest_cov3_all_chr19
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr19 > startchr19
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr19 > endchr19
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr19 > chr19
+sed -i 's/NA\s*/19/g' chr19
+paste -d ' ' startchr19 chr19 endchr19 > rf_snptest_cov3_all_chr19
+cat rf_snptest_cov3_all_chr19 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr20 > headless_snptest_cov3_all_chr20
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr20 > startchr20
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr20 > endchr20
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr20 > chr20
+sed -i 's/NA\s*/20/g' chr20
+paste -d ' ' startchr20 chr20 endchr20 > rf_snptest_cov3_all_chr20
+cat rf_snptest_cov3_all_chr20 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr21 > headless_snptest_cov3_all_chr21
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr21 > startchr21
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr21 > endchr21
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr21 > chr21
+sed -i 's/NA\s*/21/g' chr21
+paste -d ' ' startchr21 chr21 endchr21 > rf_snptest_cov3_all_chr21
+cat rf_snptest_cov3_all_chr21 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chr22 > headless_snptest_cov3_all_chr22
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chr22 > startchr22
+cut -d ' ' -f 4- headless_snptest_cov3_all_chr22 > endchr22
+cut -d ' ' -f 3 headless_snptest_cov3_all_chr22 > chr22
+sed -i 's/NA\s*/22/g' chr22
+paste -d ' ' startchr22 chr22 endchr22 > rf_snptest_cov3_all_chr22
+cat rf_snptest_cov3_all_chr22 >> snptest_cov3_all_chr
+
+tail -n +14 snptest_cov3_all_chrX > headless_snptest_cov3_all_chrX
+cut -d ' ' -f 1-2 headless_snptest_cov3_all_chrX > startchrX
+cut -d ' ' -f 4- headless_snptest_cov3_all_chrX > endchrX
+cut -d ' ' -f 3 headless_snptest_cov3_all_chrX > chrX
+sed -i 's/NA\s*/X/g' chrX
+paste -d ' ' startchrX chrX endchrX > rf_snptest_cov3_all_chrX
+cat rf_snptest_cov3_all_chrX >> snptest_cov3_all_chr
+
